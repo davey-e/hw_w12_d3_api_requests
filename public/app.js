@@ -6,6 +6,9 @@ const app = function () {
     const makeRequest = function(){
         const table = document.getElementById("beer-list");
         table.innerHTML = "";
+        const beerTable = document.getElementById("beer");
+        beerTable.innerHTML = "";
+
         const request = new XMLHttpRequest();
         request.open("GET", url);
         request.addEventListener("load", requestComplete);
@@ -15,6 +18,9 @@ const app = function () {
     const handleDDSelectionChange = function(){
         const table = document.getElementById("beer-list");
         table.innerHTML = "";
+        const beerTable = document.getElementById("beer");
+        beerTable.innerHTML = "";
+
         const id = parseInt(viewBeerDetailsDD.value) + 1;
         const urlWithId = "https://api.punkapi.com/v2/beers/" + id;
         const requestSingle = new XMLHttpRequest();
@@ -39,8 +45,6 @@ const requestCompleteSingle = function(){
 }
 
 const populateTableSingle = function(beer){
-    console.log(beer);
-    
     const table = document.getElementById("beer");
     table.innerHTML = "";
 
