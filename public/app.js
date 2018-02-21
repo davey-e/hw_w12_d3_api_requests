@@ -28,9 +28,13 @@ const populateList = function(beersList){
 }
 
 const addBeerToList = function(beer, beerListUlElement){
-    const li = document.createElement('li');
+    const li = document.createElement("li");
     li.innerText = beer.name;
     beerListUlElement.appendChild(li);
+    const img = document.createElement("img");
+    img.src = beer.image_url;
+    img.height = 200;
+    li.appendChild(img);
 }
 
 document.addEventListener('DOMContentLoaded', app);
