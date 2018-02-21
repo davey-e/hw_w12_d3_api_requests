@@ -13,7 +13,7 @@ const app = function () {
     }
 
     const viewAllBeersButton = document.getElementById("view-all-button");
-    viewAllBeersButton.addEventListener('click', makeRequest);
+    viewAllBeersButton.addEventListener("click", makeRequest);
     
 }
 
@@ -21,10 +21,11 @@ const requestComplete = function(){
     if(this.status !== 200) return;
     const jsonString = this.responseText;
     const beers = JSON.parse(jsonString);
-    populateList(beers);
+    populateTable(beers);
+    populateDDList(beers);
 }
 
-const populateList = function(beersList){
+const populateTable = function(beersList){
     const table = document.getElementById("beer-list");
     beersList.forEach(function(beer){
         addBeerToTable(beer, table);
@@ -43,6 +44,25 @@ const addBeerToTable = function(beer, tableElement){
     tr.appendChild(td1);
     tr.appendChild(td2);
     tableElement.appendChild(tr);
+}
+
+const populateDDList = function(beersList){
+    const beerDetailsDropDown = document.getElementById("select-beer");
+    beerDetailsDropDown.innerHTML = "";
+    const disabledOption = document.createElement("option");
+    disabledOption.disabled = true;
+    disabledOption.selected = true;
+    disabledOption.innerText = "Select a Beer from the list to view its details";
+    beerDetailsDropDown.appendChild(disabledOption);
+    beersList.forEach(function(beer){
+        addBeerToList(beer, beerDetailsDropDown);
+    });
+}
+
+const addBeerToList = function(beer, dropDown){
+    const option = document.createElement("option");
+    option.innerText = beer.name;
+    dropDown.appendChild(option);
 }
 
 document.addEventListener('DOMContentLoaded', app);
