@@ -4,10 +4,7 @@ const app = function () {
     // const url = "https://s3-eu-west-1.amazonaws.com/brewdogapi/beers.json"
 
     const makeRequest = function(){
-        const table = document.getElementById("beer-list");
-        table.innerHTML = "";
-        const beerTable = document.getElementById("beer");
-        beerTable.innerHTML = "";
+        clearTables();
 
         const request = new XMLHttpRequest();
         request.open("GET", url);
@@ -16,13 +13,10 @@ const app = function () {
     }
 
     const handleDDSelectionChange = function(){
-        const table = document.getElementById("beer-list");
-        table.innerHTML = "";
-        const beerTable = document.getElementById("beer");
-        beerTable.innerHTML = "";
+        clearTables();
 
         const id = parseInt(viewBeerDetailsDD.value) + 1;
-        const urlWithId = "https://api.punkapi.com/v2/beers/" + id;
+        const urlWithId = url + "/" + id;
         const requestSingle = new XMLHttpRequest();
         requestSingle.open("GET", urlWithId);
         requestSingle.addEventListener("load", requestCompleteSingle);
@@ -35,6 +29,13 @@ const app = function () {
     const viewBeerDetailsDD = document.getElementById("select-beer");
     viewBeerDetailsDD.addEventListener("change", handleDDSelectionChange);
     
+}
+
+const clearTables = function(){
+    const table = document.getElementById("beer-list");
+    table.innerHTML = "";
+    const beerTable = document.getElementById("beer");
+    beerTable.innerHTML = "";
 }
 
 const requestCompleteSingle = function(){
